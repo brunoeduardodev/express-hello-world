@@ -35,7 +35,7 @@ const run = async () => {
   app.listen(3000, () => {
     logger.info("Server started on port 3000");
 
-    let iteration = 0;
+    let iteration = 10;
     setInterval(() => {
       logger.info({ msg: "cron running", iteration });
       iteration++;
