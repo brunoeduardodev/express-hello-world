@@ -37,7 +37,7 @@ const run = async () => {
 
     let iteration = 0;
     setInterval(() => {
-      logger.info("Cron example running", { iteration });
+      logger.info({ msg: "cron running", iteration });
       iteration++;
     }, 5000);
   });
