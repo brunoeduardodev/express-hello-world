@@ -9,7 +9,10 @@ const run = async () => {
 
   app.get("/", (req, res) => {
     logger.info("Root request received");
-    res.json({ message: "Hello World!" });
+    res.json({
+      message: "Hello World!",
+      env: process.env.EXAMPLE_ENV || "not set",
+    });
   });
 
   app.get("/ping", (req, res) => {
