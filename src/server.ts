@@ -1,6 +1,8 @@
 import express from "express";
 import pino from "pino";
 
+const VERSION = 1;
+
 const run = async () => {
   const logger = pino();
   const app = express();
@@ -8,7 +10,10 @@ const run = async () => {
   app.use(express.json());
 
   app.get("/", (req, res) => {
-    logger.info("Root request received");
+    logger.info({
+      msg: "Root request received",
+      version: VERSION,
+    });
     res.json({
       message: "Hello World!",
       env: process.env.EXAMPLE_ENV || "not set",
