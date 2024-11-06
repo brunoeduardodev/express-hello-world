@@ -14,9 +14,16 @@ const run = async () => {
       msg: "Root request received",
       version: VERSION,
     });
+
+    const allEnvs = Object.entries(process.env).reduce(
+      (acc, [key, value]) => ({ ...acc, [key]: value }),
+      {}
+    );
+
     res.json({
       message: "Hello World!",
       env: process.env.EXAMPLE_ENV || "not set",
+      allEnvs,
     });
   });
 
