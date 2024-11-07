@@ -24,6 +24,7 @@ const run = async () => {
       message: "Hello World!",
       env: process.env.EXAMPLE_ENV || "not set",
       allEnvs,
+      version: 1,
     });
   });
 
