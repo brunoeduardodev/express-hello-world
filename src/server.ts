@@ -1,10 +1,22 @@
 import express from "express";
 import pino from "pino";
+import stream from "stream";
 
 const VERSION = 1;
 
+const streams = [
+  { level: "debug", stream: process.stdout },
+  { level: "error", stream: process.stderr },
+  { level: "fatal", stream: process.stderr },
+];
+
 const run = async () => {
-  const logger = pino();
+  const logger = pino(
+    {
+      level: "debug",
+    },
+    pino.multistream(streams)
+  );
   const app = express();
 
   app.use(express.json());
@@ -53,7 +65,12 @@ const run = async () => {
 
     let iteration = 10;
     setInterval(() => {
-      logger.info({ msg: "cron running", iteration });
+      if (Math.random() > 0.5) {
+        logger.info({ msg: "cron running", iteration });
+      } else {
+        console.error("Cron failed");
+        logger.error({ msg: "cron failed", iteration });
+      }
       iteration++;
     }, 5000);
   });
